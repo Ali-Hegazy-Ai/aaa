@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
    
-    const animatedElements = document.querySelectorAll('.product-item, .benefit-item, .commitment-item, .badge, .stat-item, .quality-statement');
+    const animatedElements = document.querySelectorAll('.product-item, .benefit-item, .commitment-item, .certification-item, .badge, .stat-item, .quality-statement');
     
     
     const qualityStatement = document.querySelector('.quality-statement');
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // User's browser is set to Arabic
                 if (document.documentElement.getAttribute('lang') !== 'ar') {
                     // Redirect to Arabic page if not already on it
-                    window.location.href = 'index-arabic.html';
+                    window.location.href = 'index-ar.html';
                     return;
                 }
             } else {
@@ -127,7 +127,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check if user has a theme preference stored
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
+    if (savedTheme !== 'dark') {
+        // Default to light mode if no preference or if preference is not explicitly dark
         document.body.classList.add('light-mode');
         themeIcon.classList.replace('fa-moon', 'fa-sun');
     }
@@ -161,18 +162,60 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             // Switch to Arabic
             localStorage.setItem('language', 'ar');
-            window.location.href = 'index-arabic.html';
+            window.location.href = 'index-ar.html';
         }
     });
 
-    // Mobile menu functionality
+    // Mobile menu functionality - improved implementation
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     if (mobileMenuBtn) {
         const nav = document.querySelector('nav');
+        const navUl = nav.querySelector('ul');
+        const body = document.body;
+        
         mobileMenuBtn.addEventListener('click', function() {
-            nav.classList.toggle('show');
-            const navUl = nav.querySelector('ul');
             navUl.classList.toggle('active');
+            body.classList.toggle('menu-open');
+            
+            // Toggle menu icon between bars and X
+            const icon = this.querySelector('i');
+            if (navUl.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = nav.contains(event.target);
+            const isClickOnMenuBtn = mobileMenuBtn.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnMenuBtn && navUl.classList.contains('active')) {
+                navUl.classList.remove('active');
+                body.classList.remove('menu-open');
+                
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking on a nav link (for mobile)
+        const navLinks = navUl.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navUl.classList.remove('active');
+                    body.classList.remove('menu-open');
+                    
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
         });
     }
 });
