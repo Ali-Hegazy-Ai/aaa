@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - المصرية الإيطالية لإنتاج سكر التمر</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Fixed selector issues and added missing transitions */
+        .about-hero {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--primary-glow) 0%, transparent 70%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .about-hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .about-hero p {
+            font-size: clamp(16px, 3vw, 18px);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: transparent;
+            padding: 0;
+        }
+        
+        .breadcrumb a, .breadcrumb span {
+            color: var(--text-light);
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary-light);
+        }
+        
+        .about-section {
+            padding: 80px 0;
+            background-color: var(--bg-dark);
+        }
+        
+        .about-section h2 {
+            color: var(--primary-light);
+            font-size: clamp(26px, 4vw, 36px);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+        }
+        
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--card-dark);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(212, 167, 106, 0.2);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-light);
+        }
+        
+        .stat-item i {
+            font-size: 36px;
+            color: var(--primary-light);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover i {
+            transform: scale(1.2);
+            color: #fff;
+        }
+        
+        .stat-item h3 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .stat-item:hover h3 {
+            color: #fff;
+        }
+        
+        .stat-item p {
+            font-size: 16px;
+            margin-bottom: 0;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .mission, .vision {
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .mission {
+            background-color: var(--bg-dark-secondary);
+            color: var(--text-light);
+            border: 1px solid rgba(212, 167, 106, 0.2);
+        }
+        
+        .vision {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: var(--bg-dark);
+        }
+        
+        .mission:hover, .vision:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .mission h3, .vision h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .mission i, .vision i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .mission:hover i, .vision:hover i {
+            transform: scale(1.2) rotate(10deg);
+        }
+        
+        .team-section {
+            background-color: var(--bg-dark-secondary);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--primary-glow) 0%, transparent 70%);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            background-color: var(--card-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 167, 106, 0.3);
+        }
+        
+        .team-photo {
+            height: 280px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-dark);
+        }
+        
+        .team-photo i {
+            transition: transform 0.5s ease, color 0.5s ease;
+        }
+        
+        .team-member:hover .team-photo i {
+            transform: scale(1.1);
+            color: #fff;
+        }
+        
+        .team-info {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--primary-light);
+            transition: color 0.3s ease;
+        }
+        
+        .team-member:hover .team-info h3 {
+            color: #fff;
+        }
+        
+        .team-info p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .team-social a {
+            color: var(--primary-light);
+            font-size: 18px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .team-social a:hover {
+            color: #fff;
+            transform: translateY(-3px);
+        }
+        
+        /* Light mode overrides */
+        body.light-mode .about-section {
+            background-color: var(--bg-light);
+        }
+        
+        body.light-mode .about-hero {
+            background-color: var(--bg-light-secondary);
+        }
+        
+        body.light-mode .about-section p,
+        body.light-mode .timeline-content p,
+        body.light-mode .breadcrumb a, 
+        body.light-mode .breadcrumb span {
+            color: var(--text-dark);
+        }
+        
+        body.light-mode .stat-item {
+            background-color: var(--card-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        body.light-mode .mission {
+            background-color: var(--bg-light);
+            border-color: rgba(139, 69, 19, 0.1);
+        }
+        
+        body.light-mode .team-member {
+            background-color: var(--card-light);
+            border-color: rgba(139, 69, 19, 0.1);
+        }
+        
+        body.light-mode .timeline-content {
+            background-color: var(--card-light);
+            border-color: rgba(139, 69, 19, 0.1);
+        }
+        
+        body.light-mode .team-section {
+            background-color: var(--bg-light-secondary);
+        }
+        
+        body.light-mode .team-photo {
+            background-color: var(--bg-light);
+        }
+        
+        body.light-mode .timeline-item::after {
+            background-color: var(--bg-light);
+        }
+        
+        /* Fix for icons in light mode */
+        body.light-mode .stat-item i,
+        body.light-mode .mission i,
+        body.light-mode .team-photo i,
+        body.light-mode .team-social a {
+            color: var(--primary-dark);
+        }
+        
+        body.light-mode .stat-item:hover i,
+        body.light-mode .mission:hover i,
+        body.light-mode .team-member:hover .team-photo i,
+        body.light-mode .team-social a:hover {
+            color: var(--primary-color);
+        }
+        
+        body.light-mode .stat-item h3,
+        body.light-mode .team-info h3 {
+            color: var(--primary-dark);
+        }
+        
+        body.light-mode .team-info p {
+            color: var(--text-dark);
+        }
+        
+        body.light-mode .section-title {
+            color: var(--primary-dark);
+        }
+        
+        body.light-mode .about-section h2 {
+            color: var(--primary-dark);
+        }
+        
+        body.light-mode .timeline-content h3 {
+            color: var(--primary-dark);
+        }
+        
+        body.light-mode .mission:hover .mission-text,
+        body.light-mode .mission:hover i {
+            color: var(--primary-dark);
+        }
+        
+        body.light-mode .vision {
+            color: #fff;
+        }
+        
+        body.light-mode .vision p {
+            color: #fff;
+        }
+        
+        /* Fix team member hover effects in light mode */
+        body.light-mode .team-member:hover .team-info h3 {
+            color: var(--primary-dark);
+        }
+        
+        body.light-mode .team-social a:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Remove unused styles for removed elements */
+        @media screen and (max-width: 768px) {            
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .about-section {
+                padding: 50px 0;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .stat-item {
+                padding: 20px 10px;
+            }
+            
+            .stat-item h3 {
+                font-size: 32px;
+            }
+            
+            .stat-item i {
+                font-size: 30px;
+            }
+            
+            .mission, .vision {
+                padding: 30px 20px;
+            }
+            
+            .team-member {
+                max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
+        /* Fixed section title styling for team section */
+        .section-title {
+            color: var(--primary-light);
+            font-size: clamp(26px, 4vw, 36px);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>المصرية الإيطالية لإنتاج سكر التمر</h1>
+            </div>
+            <div class="header-controls">
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav>
+                <ul>
+                    <li class="lang-switch">
+                        <button id="lang-toggle" aria-label="تبديل اللغة">
+                            <span>English</span>
+                        </button>
+                    </li>
+                    <li><a href="index-ar.html">الرئيسية</a></li>
+                    <li><a href="index-ar.html#products">المنتجات</a></li>
+                    <li style="white-space: nowrap;"><a href="about-us-ar.html">من نحن</a></li>
+                    <li><a href="index-ar.html#benefits">الفوائد</a></li>
+                    <li><a href="index-ar.html#certifications">الشهادات</a></li>
+                    <li style="white-space: nowrap;"><a href="index-ar.html#contact">تواصل معنا</a></li>
+                    <li class="theme-switch">
+                        <button id="theme-toggle" aria-label="تبديل الوضع المظلم/الفاتح">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="about-hero" style="background-image: url(about-ushero.jpg); background-size: cover; background-position: center; position: relative; background-attachment: fixed;">
+        <div class="hero-overlay"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="breadcrumb">
+                <a href="index-ar.html">الرئيسية</a>
+                <span>/</span>
+                <span>من نحن</span>
+            </div>
+            <h1 class="hero-title">عن الشركة</h1>
+            <p class="hero-text">تعرف على الشركة الرائدة في مجال صناعة سكر التمر السائل المصري الإيطالي</p>
+        </div>
+        <style>
+            .about-hero {
+                overflow: hidden;
+            }
+            
+            .hero-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7));
+                backdrop-filter: blur(3px);
+                -webkit-backdrop-filter: blur(3px);
+                z-index: 1;
+            }
+            
+            .hero-title {
+                animation: fadeInDown 1.2s ease-out;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+                color: #fff;
+                font-weight: 700;
+            }
+            
+            .hero-text {
+                animation: fadeInUp 1.2s ease-out;
+                text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9);
+                color: #fff;
+                font-weight: 500;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            .about-hero .breadcrumb {
+                position: relative;
+                z-index: 2;
+                margin-bottom: 30px;
+                animation: fadeIn 1s ease-out;
+            }
+            
+            .about-hero .breadcrumb a,
+            .about-hero .breadcrumb span {
+                color: rgba(255, 255, 255, 0.9);
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            }
+            
+            .about-hero .breadcrumb a:hover {
+                color: var(--primary-light);
+            }
+            
+            /* Fix breadcrumb visibility in light mode */
+            body.light-mode .about-hero .breadcrumb a,
+            body.light-mode .about-hero .breadcrumb span {
+                color: #d4a76a;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            }
+            
+            body.light-mode .about-hero .breadcrumb a:hover {
+                color:#fff;
+            }
+            
+            body.light-mode .hero-title,
+            body.light-mode .hero-text {
+                color: #d4a76a;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        </style>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <h2>من نحن</h2>
+            <p> مصنع المصرية الإيطالية لإنتاج سكر التمر  (EIDLS) هو المُصنّع الوحيد في مصر والرائد في أفريقيا المتخصص في منتجات سكر التمر السائل. تأسست الشركة برؤية لتحويل التمور المصرية الممتازة إلى بدائل صحية مبتكرة للسكر المكرر، ونمت لتصبح رائدة في هذا المجال.</p>
+            <p>يغطي مصنعنا المتطور حاليًا مساحة 10,000 متر مربع ويتم توسيعه إلى 40,000 متر مربع لتلبية الطلب العالمي المتزايد. نجمع بين المعرفة التقليدية والتكنولوجيا المتطورة لإنشاء منتجات تحافظ على الفوائد الطبيعية للتمور مع تقديم نكهة وفوائد غذائية استثنائية.</p>
+            
+            <!-- Removed the about-stats section with the four cards -->
+            
+            <div class="mission-vision">
+                <div class="mission">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>مهمتنا</h3>
+                    <p>تقديم منتجات تمور عالية الجودة وطبيعية توفر بدائل صحية للسكر المكرر مع دعم الزراعة المستدامة والتنمية الاقتصادية في مصر.</p>
+                </div>
+                <div class="vision">
+                    <i class="fas fa-eye"></i>
+                    <h3>رؤيتنا</h3>
+                    <p>أن نكون الرائد العالمي في المُحليات المعتمدة على التمور، معترف بنا عالميًا للابتكار والجودة والاستدامة، مع تعزيز الخصائص الفريدة للتمور المصرية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">فريق القيادة لدينا</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <i class="fas fa-user-circle" style="font-size: 280px; display: flex; justify-content: center; align-items: center; height: 100%; color: var(--primary-light);"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>أحمد حسن</h3>
+                        <p>الرئيس التنفيذي</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <i class="fas fa-user-circle" style="font-size: 280px; display: flex; justify-content: center; align-items: center; height: 100%; color: var(--primary-light);"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>ماريا رومانو</h3>
+                        <p>مدير العمليات</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <i class="fas fa-user-circle" style="font-size: 280px; display: flex; justify-content: center; align-items: center; height: 100%; color: var(--primary-light);"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>كريم محمد</h3>
+                        <p>رئيس قسم البحث والتطوير</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <i class="fas fa-user-circle" style="font-size: 280px; display: flex; justify-content: center; align-items: center; height: 100%; color: var(--primary-light);"></i>
+                    </div>
+                    <div class="team-info">
+                        <h3>سارة محمود</h3>
+                        <p>مدير المبيعات العالمية</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <h2>EIDLS</h2>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>الموقع</h3>
+                    <ul>
+                        <li><a href="index-ar.html">الرئيسية</a></li>
+                        <li><a href="index-ar.html#products">المنتجات</a></li>
+                        <li><a href="about-us-ar.html">من نحن</a></li>
+                        <li><a href="index-ar.html#contact">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>تواصل معنا</h3>
+                    <ul>
+                        <li>البريد الإلكتروني: Info@mids-eg.com / Export@mids-eg.com</li>
+                        <li>الهاتف: 0109755563 / 01000291586 / 01000285114 / 01097555353</li>
+                        <li>العنوان: المنطقة الصناعية بي ٤ - القطعة ١٠٤ - العاشر من رمضان - الشرقية</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2025 المصرية الإيطالية لإنتاج سكر التمر. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Override the default language toggle functionality
+        document.getElementById('lang-toggle').addEventListener('click', function(event) {
+            // Prevent the default script behavior
+            event.preventDefault();
+            event.stopPropagation();
+            
+            // Switch to English version of about-us page
+            window.location.href = 'about-us.html';
+        }, true);
+        
+        // Add animation for section titles
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add observer for section titles for animation
+            const sectionTitles = document.querySelectorAll('h2, .section-title');
+            sectionTitles.forEach(title => {
+                title.style.opacity = '0';
+                title.style.transform = 'translateY(20px)';
+                title.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                const titleObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+                
+                titleObserver.observe(title);
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
